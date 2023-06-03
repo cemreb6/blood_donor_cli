@@ -5,6 +5,6 @@ export const BloodTypes={
     "B_positive":"B+",
     "AB_negative":"AB-",
     "AB_positive":"AB+",
-    "0_negative":"O-",
+    "0_negative":"0-",
     "O_Positive":"0+"
 }
