@@ -5,14 +5,24 @@ import LockRoundedIcon from '@mui/icons-material/LockRounded';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 
 import { bloodIcon } from '@/assets/icons';
-import { iconStyle } from '@/styles/appstyles';
+import { CustomTextField, iconStyle } from '@/styles/appstyles';
+import React, { useRef } from 'react';
 
 export default function Home() {
+
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
+
+  const handleClick = () => {
+    console.log(emailRef.current, passwordRef.current);
+  }
   return (
     <Stack direction="column" spacing={2} ml={15} mr={15} mt={10} alignItems="stretch">
+
       <div className="icon-wrapper">{bloodIcon}</div>
       <h3>blood donation</h3>
-      <TextField
+
+      <CustomTextField
         label="Email"
         InputProps={{
           startAdornment: (
@@ -23,21 +33,26 @@ export default function Home() {
         }}
         variant="standard"
         type="email"
+        onChange={(e) => emailRef.current = e.target.value}
         required
       />
-      <TextField
+
+      <CustomTextField
         label="Password"
         InputProps={{
           startAdornment: (
-            <InputAdornment position="start">
+            <InputAdornment position="start" >
               <LockRoundedIcon sx={iconStyle} />
             </InputAdornment>
           ),
         }}
         variant="standard"
         type="password"
-        required />
-      <Button variant="contained" endIcon={<LoginRoundedIcon />} color="error">
+        required
+        onChange={(e) => passwordRef.current = e.target.value}
+      />
+
+      <Button variant="contained" endIcon={<LoginRoundedIcon />} color="error" onClick={handleClick}>
         Login
       </Button>
     </Stack>

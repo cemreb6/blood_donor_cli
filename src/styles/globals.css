@@ -23,3 +23,7 @@ h3{
   color: var(--primary);
   text-align: center;
 }
+
+.css-v4u5dn-MuiInputBase-root-MuiInput-root:after{
+  border-bottom: 2px solid var(--secondary);
+}
