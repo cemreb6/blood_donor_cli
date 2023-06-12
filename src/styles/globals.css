@@ -27,3 +27,7 @@ h3{
 .css-v4u5dn-MuiInputBase-root-MuiInput-root:after{
   border-bottom: 2px solid var(--secondary);
 }
+
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+  color:var( --tertiary) ;
+}

@@ -1,20 +1,25 @@
-import { Button, InputAdornment, Stack, TextField } from '@mui/material';
+import React, { useRef } from 'react';
 
+import { Button, InputAdornment, Stack } from '@mui/material';
 import LoginRoundedIcon from '@mui/icons-material/LoginRounded';
 import LockRoundedIcon from '@mui/icons-material/LockRounded';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 
 import { bloodIcon } from '@/assets/icons';
 import { CustomTextField, iconStyle } from '@/styles/appstyles';
-import React, { useRef } from 'react';
+import { useRouter } from 'next/router';
+
 
 export default function Home() {
 
   const emailRef = useRef("");
   const passwordRef = useRef("");
+  
+  const router=useRouter();
 
   const handleClick = () => {
     console.log(emailRef.current, passwordRef.current);
+    router.push("/AddBlood");
   }
   return (
     <Stack direction="column" spacing={2} ml={15} mr={15} mt={10} alignItems="stretch">
