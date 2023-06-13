@@ -15,7 +15,7 @@ export const CustomFormControl = styled(FormControl)`
   }
 }
 & .MuiInputLabel-root {
-    color: var(--accent);
+    color: var(--text-color);
   }`;
 
   export const CustomTextField = styled(TextField)`
@@ -35,5 +35,5 @@ export const CustomFormControl = styled(FormControl)`
     }
   }
   & .MuiInputLabel-root {
-      color: var(--accent);
+      color: var(--text-color);
     }`;
