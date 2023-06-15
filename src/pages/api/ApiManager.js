@@ -1,4 +1,4 @@
-import { loginHospitalUrl } from "./ApiRoutes"
+import { loginBranchUrl, loginHospitalUrl } from "./ApiRoutes"
 import { Post } from "./MakeRequest"
 
 export const GetCities=()=>{
@@ -17,8 +17,9 @@ export const GetTowns=()=>{
     )
 }
 
-export const HandleLogin=async(email,password)=>{
-   const response= await Post({email,password},loginHospitalUrl,{
+export const HandleLogin=async(email,password,isHospital)=>{
+    const url= isHospital? loginHospitalUrl : loginBranchUrl;
+   const response= await Post({email,password},url,{
         headers: {
             'Content-Type': 'application/json',
         }

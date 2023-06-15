@@ -5,9 +5,10 @@ import LoginRoundedIcon from '@mui/icons-material/LoginRounded';
 import LockRoundedIcon from '@mui/icons-material/LockRounded';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import Alert from '@mui/material/Alert';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 import { bloodIcon } from '@/assets/icons';
-import { CustomTextField, iconStyle } from '@/styles/appstyles';
+import { CustomTextField, PinkSwitch, iconStyle } from '@/styles/appstyles';
 import { useRouter } from 'next/router';
 import { HandleLogin } from './api/ApiManager';
 import { isNullOrEmpty } from '@/utils/InputValidator';
@@ -17,29 +18,30 @@ import { Spinner } from '@/components/Spinner/Spinner';
 export default function Home() {
 
   const [onAlert, setOnAlert] = useState({ state: false, message: "" });
-  const [loading,setLoading]=useState(true);
+  const [loading, setLoading] = useState(true);
 
   const emailRef = useRef("");
   const passwordRef = useRef("");
-
+  const isHospital=useRef(true);
   const router = useRouter();
 
   useEffect(
-    ()=>{
- 
-      const token=getToken();
-      if(token){
+    () => {
+
+      const token = getToken();
+      if (token) {
         router.push("/AddBlood");
       }
       setLoading(false);
-    },[]
+    }, []
   )
   const handleClick = async () => {
     try {
       setLoading(true);
       setOnAlert({ state: false, message: "" })
       if (!isNullOrEmpty(emailRef.current) && !isNullOrEmpty(passwordRef.current)) {
-        const response = await HandleLogin(emailRef.current, passwordRef.current);
+        const response =  await HandleLogin(emailRef.current, passwordRef.current,isHospital)
+        
         if (response.progress) {
           setAuthenticatedUser(response.data);
           router.push("/AddBlood");
@@ -60,8 +62,8 @@ export default function Home() {
   return (
     <Stack direction="column" spacing={2} ml={15} mr={15} mt={10} alignItems="stretch">
       {
-        loading && 
-        <Spinner/>
+        loading &&
+        <Spinner />
       }
       <div className="icon-wrapper">{bloodIcon}</div>
       <h3>blood donation</h3>
@@ -102,7 +104,14 @@ export default function Home() {
         required
         onChange={(e) => passwordRef.current = e.target.value}
       />
-
+      
+      <FormControlLabel
+          control={
+            <PinkSwitch  defaultChecked onChange={(e)=>isHospital.current=e.target.checked}/>
+          }
+          label={'Hospital'}
+          
+        />
       <Button variant="contained" endIcon={<LoginRoundedIcon />} color="error" onClick={handleClick}>
         Login
       </Button>
