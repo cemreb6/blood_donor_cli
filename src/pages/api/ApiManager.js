@@ -1,4 +1,5 @@
-import { loginBranchUrl, loginHospitalUrl } from "./ApiRoutes"
+import { getHospitalId, getToken } from "@/services/SessionStorageManager"
+import { donorlistUrl, loginBranchUrl, loginHospitalUrl } from "./ApiRoutes"
 import { Post } from "./MakeRequest"
 
 export const GetCities=()=>{
@@ -22,6 +23,16 @@ export const HandleLogin=async(email,password,isHospital)=>{
    const response= await Post({email,password},url,{
         headers: {
             'Content-Type': 'application/json',
+        }
+    });
+    return response;
+}
+
+export const GetDonorList=async()=>{
+    const response= await Post({id:parseInt(getHospitalId())},donorlistUrl,{
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': "bearer " + getToken(),
         }
     });
     return response;
