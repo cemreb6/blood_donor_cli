@@ -40,7 +40,7 @@ export default function Home() {
       setLoading(true);
       setOnAlert({ state: false, message: "" })
       if (!isNullOrEmpty(emailRef.current) && !isNullOrEmpty(passwordRef.current)) {
-        const response =  await HandleLogin(emailRef.current, passwordRef.current,isHospital)
+        const response =  await HandleLogin(emailRef.current, passwordRef.current,isHospital.current)
         
         if (response.progress) {
           setAuthenticatedUser(response.data);
