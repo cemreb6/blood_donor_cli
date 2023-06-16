@@ -27,6 +27,7 @@ export default function AddDonor() {
         }, [])
   
             const handleAddDonor = (name,phoneNumber,town,city,blood,image) => {
+                console.log(name,phoneNumber,town,city,blood,image)
                 HandleAddDonor(blood,image,name,phoneNumber,city,town).then(response=>{
                     console.log(response);
                 });
