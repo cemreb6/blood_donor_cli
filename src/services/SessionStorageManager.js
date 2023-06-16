@@ -4,8 +4,18 @@ export const getToken=()=> sessionStorage.getItem("token");
 export const setLoggedInStatus=(isLoggedIn)=>sessionStorage.setItem("loggedIn",isLoggedIn);
 export const getLoggedInStatus=()=>sessionStorage.getItem("loggedIn");
 
-export const setFullname=(name,surname)=>sessionStorage.setItem("fullname",`${name} ${surname}`);
-export const getFullname=()=>sessionStorage.getItem("fullname");
+export const setFullname=(name,surname)=>{
+    sessionStorage.setItem("name",name);
+    sessionStorage.setItem("surname",surname);
+};
+export const getFullname=()=>{
+    return (
+        {
+            name:sessionStorage.getItem("name"),
+            surname:sessionStorage.getItem("surname"),
+        }
+    )
+};
 
 export const setEmail=(email)=>sessionStorage.setItem("email",email);
 export const getEmail=()=>sessionStorage.getItem("email");
@@ -22,6 +32,12 @@ export const getHospitalId=()=>sessionStorage.getItem("hospitalId");
 export const setisHospital=(isHospital)=>sessionStorage.setItem("isHospital",isHospital);
 export const getisHospital=()=>sessionStorage.getItem("isHospital");
 
+export const setcity=(city)=>sessionStorage.setItem("city",city);
+export const getcity=()=>sessionStorage.getItem("city");
+
+export const settown=(town)=>sessionStorage.setItem("town",town);
+export const gettown=()=>sessionStorage.getItem("town");
+
 export const setAuthenticatedUser=(data)=>{
         setToken(data.user.token);
         setFullname(data.user.name,data.user.surname);
@@ -36,9 +52,12 @@ export const setAuthenticatedUser=(data)=>{
             abMinusBloodUnit:data.hospital ? data.hospital.abMinusBloodUnit : data.branch.abMinusBloodUnit,
             zeroMinusBloodUnit:data.hospital ? data.hospital.zeroMinusBloodUnit : data.branch.zeroMinusBloodUnit,
         });
-        setHospitalName(data.hospital ? data.hospital.name : data.branch.city.concat("-"+data.branch.town));
+        setHospitalName(data.hospital ? data.hospital.name : "Branch");
         setHospitalId(data.hospital? data.hospital.id : data.branch.id);
 
         setisHospital(data.hospital !==null && data.hospital !==undefined);
+
+        setcity(data?.branch?.city);
+        settown(data?.branch?.town);
 
 }

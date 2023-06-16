@@ -11,16 +11,29 @@ import Layout from "@/components/Layout";
 import { CustomOutlinedTextField } from "@/styles/appstyles";
 import { BloodTypes } from "@/utils/Constants";
 import ImageUploader from "@/components/ImageUploader";
-import { GetCities, GetTowns } from "./api/ApiManager";
+import { GetCities, GetDonorList, GetTowns } from "./api/ApiManager";
 import DonorTable from "@/components/DonorTable";
 import { useRouter } from "next/router";
 import { getToken, getisHospital } from "@/services/SessionStorageManager";
 
-export default function CreateDonor() {
-    const [donors, setDonors] = useState([{ id: 1, fullname: "Cemre Bitgen", bloodType: "B+", city: "İzmir", "town": "Konak" }]);
+export default function AddDonor() {
+    const [donors, setDonors] = useState([]);
     const router = useRouter();
-    if (getToken()) {
-        if (getisHospital() === "false") {
+    const [token,setToken]=useState("");
+    const [isHospital,setIsHospital]=useState("");
+    const x=""
+    useEffect (
+        () => {
+            setToken(getToken());
+            setIsHospital(getisHospital());
+            GetDonorList().then(response => {
+                if(response.data.length>0){
+                    setDonors(response.data);
+                }
+            })
+        }, [x])
+    if (token) {
+        if ( isHospital=== "false") {
             const handleAddDonor = () => {
 
             }

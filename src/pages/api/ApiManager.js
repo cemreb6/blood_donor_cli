@@ -1,6 +1,6 @@
-import { getHospitalId, getToken } from "@/services/SessionStorageManager"
-import { donorlistUrl, loginBranchUrl, loginHospitalUrl } from "./ApiRoutes"
-import { Post } from "./MakeRequest"
+import { getFullname, getHospitalId, getToken } from "@/services/SessionStorageManager"
+import { addDonorUrl, donorlistUrl, loginBranchUrl, loginHospitalUrl } from "./ApiRoutes"
+import { Post, PostMultiDataForm } from "./MakeRequest"
 
 export const GetCities=()=>{
     return(
@@ -36,4 +36,23 @@ export const GetDonorList=async()=>{
         }
     });
     return response;
+}
+
+export const HandleAddDonor=async(bloodType,photo,fullname,phone,city,town)=>{
+    var array = fullname.split(" ")
+    let formData=new FormData();
+    formData.append("branchId",getHospitalId());
+    formData.append("name",array[0]);
+    formData.append("surname",array.length>1 ? array[1] : "");
+    formData.append("bloodType",bloodType);
+    formData.append("phone",phone);
+    formData.append("city",city);
+    formData.append("town",town);
+    formData.append("photo",photo);
+    return await PostMultiDataForm(formData,addDonorUrl,{
+        headers: {
+            'Content-Type': "multipart/form-data",
+            'Authorization': "bearer " + getToken(),
+        },
+    })
 }

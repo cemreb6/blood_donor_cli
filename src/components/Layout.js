@@ -1,5 +1,4 @@
 import { Stack } from "@mui/material";
-import BottomAppBar from "./BottomAppbar";
 import CustomAppbar from "./Appbar";
 
 export default function Layout({ children }) {
@@ -9,7 +8,6 @@ export default function Layout({ children }) {
             <Stack direction="column" spacing={2} ml={15} mr={15} mt={10} alignItems="stretch">
                 {children}
             </Stack>
-            <BottomAppBar />
         </>
     );
 }
