@@ -8,6 +8,7 @@ export default function ImageUploader(props){
     const handleImageChange = (event) => {
       const file = event.target.files[0];
       setSelectedImage(URL.createObjectURL(file));
+      props.setImage(URL.createObjectURL(file))
     };
   
     const handleCardMediaClick = () => {

@@ -11,26 +11,25 @@ import Layout from "@/components/Layout";
 import { CustomOutlinedTextField } from "@/styles/appstyles";
 import { BloodTypes } from "@/utils/Constants";
 import ImageUploader from "@/components/ImageUploader";
-import { GetCities, GetDonorList, GetTowns } from "./api/ApiManager";
+import { GetCities, GetDonorList, GetTowns, HandleAddDonor } from "./api/ApiManager";
 import DonorTable from "@/components/DonorTable";
-import { useRouter } from "next/router";
-import { getToken, getisHospital } from "@/services/SessionStorageManager";
 
 export default function AddDonor() {
-    const [donors, setDonors] = useState([{fullname:"Ali Yılmaz",bloodType:"AB-",city:"İzmir",town:"Alsancak"}]);
-    const router = useRouter();
+    const [donors, setDonors] = useState([]);
     
-   /* useEffect (
+    useEffect (
         () => {
-          /*  GetDonorList().then(response => {
+            GetDonorList().then(response => {
                 if(response.data.length>0){
                     setDonors(response.data);
                 }
             })
-        }, [x])*/
+        }, [])
   
-            const handleAddDonor = () => {
-
+            const handleAddDonor = (name,phoneNumber,town,city,blood,image) => {
+                HandleAddDonor(blood,image,name,phoneNumber,city,town).then(response=>{
+                    console.log(response);
+                });
             }
             return (
                 <Layout children={
@@ -42,8 +41,6 @@ export default function AddDonor() {
             );
         }
      
-    
-
 const AddDonorAccordion = ({ onClick }) => {
     const [cityList, setCityList] = useState("");
     const [townList, setTownList] = useState("");
@@ -53,6 +50,7 @@ const AddDonorAccordion = ({ onClick }) => {
     const townRef = useRef("");
     const cityRef = useRef("");
     const bloodRef = useRef("");
+    const imageRef=useRef(null);
 
     useEffect(
         () => {
@@ -62,7 +60,7 @@ const AddDonorAccordion = ({ onClick }) => {
     )
 
     const handleClick = (e) => {
-        onClick();
+        onClick(nameRef.current,phoneNumberRef.current,townRef.current,cityRef.current,bloodRef.current,imageRef.current);
     }
     return (
         <Accordion>
@@ -91,7 +89,7 @@ const AddDonorAccordion = ({ onClick }) => {
                         </Stack>
                     </Grid>
                     <Grid item xs={3}>
-                        <ImageUploader />
+                        <ImageUploader setImage={(x)=>imageRef.current=x}/>
                     </Grid>
                     <Grid item xs={12}>
                         <Button

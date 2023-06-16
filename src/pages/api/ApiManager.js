@@ -39,6 +39,7 @@ export const GetDonorList=async()=>{
 }
 
 export const HandleAddDonor=async(bloodType,photo,fullname,phone,city,town)=>{
+   try{
     var array = fullname.split(" ")
     let formData=new FormData();
     formData.append("branchId",getHospitalId());
@@ -49,10 +50,14 @@ export const HandleAddDonor=async(bloodType,photo,fullname,phone,city,town)=>{
     formData.append("city",city);
     formData.append("town",town);
     formData.append("photo",photo);
+    console.log(formData);
     return await PostMultiDataForm(formData,addDonorUrl,{
         headers: {
             'Content-Type': "multipart/form-data",
             'Authorization': "bearer " + getToken(),
         },
     })
+   }catch(err){
+    console.log(err);
+   }
 }

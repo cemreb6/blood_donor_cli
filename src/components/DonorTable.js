@@ -17,7 +17,7 @@ export default function DonorTable({ donors, onDelete, onEdit }) {
           { donors.length>0 &&
           donors.map((donor) => (
             <TableRow key={donor.id}>
-              <TableCell>{donor.fullname}</TableCell>
+              <TableCell>{donor.name.concat(" ").concat(donor.surname)}</TableCell>
               <TableCell>{donor.bloodType}</TableCell>
               <TableCell>{donor.city}</TableCell>
               <TableCell>{donor.town}</TableCell>
