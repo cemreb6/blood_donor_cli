@@ -17,23 +17,18 @@ import { useRouter } from "next/router";
 import { getToken, getisHospital } from "@/services/SessionStorageManager";
 
 export default function AddDonor() {
-    const [donors, setDonors] = useState([]);
+    const [donors, setDonors] = useState([{fullname:"Ali Yılmaz",bloodType:"AB-",city:"İzmir",town:"Alsancak"}]);
     const router = useRouter();
-    const [token,setToken]=useState("");
-    const [isHospital,setIsHospital]=useState("");
-    const x=""
-    useEffect (
+    
+   /* useEffect (
         () => {
-            setToken(getToken());
-            setIsHospital(getisHospital());
-            GetDonorList().then(response => {
+          /*  GetDonorList().then(response => {
                 if(response.data.length>0){
                     setDonors(response.data);
                 }
             })
-        }, [x])
-    if (token) {
-        if ( isHospital=== "false") {
+        }, [x])*/
+  
             const handleAddDonor = () => {
 
             }
@@ -46,14 +41,8 @@ export default function AddDonor() {
                 } />
             );
         }
-        else {
-            router.push("/RequestBlood");
-        }
-    }
-    else {
-        router.push("/");
-    }
-}
+     
+    
 
 const AddDonorAccordion = ({ onClick }) => {
     const [cityList, setCityList] = useState("");

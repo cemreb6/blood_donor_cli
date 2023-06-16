@@ -17,11 +17,8 @@ export default function AddBlood() {
     const bloodRef = useRef("");
     const unitsRef = useRef("");
 
-    const x="";
-    
-    try{
-        if (getToken()) {
-            if (getisHospital() === "false") {
+      //  if (getToken()) {
+         //   if (getisHospital() === "false") {
                 const handleClick = () => {
                     //api call
                 }
@@ -78,17 +75,14 @@ export default function AddBlood() {
                         </Grid>
                     } />
                 )
-            }
-            else {
+          //  }
+         /*  else {
                 router.push("/RequestBlood");
-            }
-        }
-        else {
+            }*/
+        //}
+       /* else {
             router.push("/");
-        }
-    }catch(err){
-        console.log('Error in adding blood request', err);
+        }*/
     }
-}
 
 

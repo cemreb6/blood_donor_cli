@@ -12,8 +12,15 @@ import { TooltipButton } from './TooltipButton';
 
 export default function CustomAppbar() {
 
-  const isHospital = getisHospital();
+  const [isHospital,setIsHospital] = React.useState("");
 
+  React.useEffect(
+    ()=>{
+      if(isHospital===""){
+        setIsHospital(getisHospital());
+      }
+    },[]
+  )
   const router = useRouter();
 
   const handleLogout = () => {

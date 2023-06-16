@@ -17,8 +17,6 @@ export default function RequestBlood() {
 
     const router = useRouter();
 
-    if (getToken()) {
-        if (getisHospital() === "true") {
             const bloodRef = useRef("");
             const townRef = useRef("");
             const cityRef = useRef("");
@@ -108,10 +106,3 @@ export default function RequestBlood() {
                 } />
             );
         }
-        else {
-            router.push("/AddBlood");
-        }
-    } else {
-        router.push("/");
-    }
-}

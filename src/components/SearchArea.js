@@ -5,7 +5,7 @@ import { GetDonorList } from '@/pages/api/ApiManager';
 
 export function SearchArea() {
     const [searchQuery, setSearchQuery] = useState('');
-    const [matchedNames, setMatchedNames] = useState([]);
+    const [matchedNames, setMatchedNames] = useState(["Cemre Bitgen","Emine Bitgen"]);
 
     useEffect(
         ()=>{
