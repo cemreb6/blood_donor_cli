@@ -9,11 +9,11 @@ export function SearchArea() {
 
     useEffect(
         ()=>{
-            GetDonorList().then(response=>{
+         /*   GetDonorList().then(response=>{
                 if(response.progress){
                     setMatchedNames(response.data)
                 }
-            })
+            })*/
         },[]
     )
     const handleSearchChange = (event, value) => {

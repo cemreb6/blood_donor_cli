@@ -12,5 +12,6 @@ export const registerToHospitalUrl=userBase.concat("/RegisterToHospital");
 export const addDonorUrl=donorBase.concat("/Add");
 export const findDonorUrl=donorBase.concat("/Find");
 export const donateUrl=donorBase.concat("/Donate");
+export const donorlistUrl=donorBase.concat("/GetList");
 
 export const requestBloodUrl=bloodBase.concat("/RequestBlood");

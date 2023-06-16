@@ -19,6 +19,9 @@ export const getHospitalName=()=>sessionStorage.getItem("hospitalName");
 export const setHospitalId=(id)=>sessionStorage.setItem("hospitalId",id);
 export const getHospitalId=()=>sessionStorage.getItem("hospitalId");
 
+export const setisHospital=(isHospital)=>sessionStorage.setItem("isHospital",isHospital);
+export const getisHospital=()=>sessionStorage.getItem("isHospital");
+
 export const setAuthenticatedUser=(data)=>{
         setToken(data.user.token);
         setFullname(data.user.name,data.user.surname);
@@ -35,4 +38,7 @@ export const setAuthenticatedUser=(data)=>{
         });
         setHospitalName(data.hospital ? data.hospital.name : data.branch.city.concat("-"+data.branch.town));
         setHospitalId(data.hospital? data.hospital.id : data.branch.id);
+
+        setisHospital(data.hospital !==null && data.hospital !==undefined);
+
 }

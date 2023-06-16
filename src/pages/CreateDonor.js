@@ -13,21 +13,33 @@ import { BloodTypes } from "@/utils/Constants";
 import ImageUploader from "@/components/ImageUploader";
 import { GetCities, GetTowns } from "./api/ApiManager";
 import DonorTable from "@/components/DonorTable";
+import { useRouter } from "next/router";
+import { getToken, getisHospital } from "@/services/SessionStorageManager";
 
-export default function CreateDonor(){
-    const [donors,setDonors]=useState([{id:1,fullname:"Cemre Bitgen",bloodType:"B+",city:"İzmir","town":"Konak"}]);
+export default function CreateDonor() {
+    const [donors, setDonors] = useState([{ id: 1, fullname: "Cemre Bitgen", bloodType: "B+", city: "İzmir", "town": "Konak" }]);
+    const router = useRouter();
+    if (getToken()) {
+        if (getisHospital() === "false") {
+            const handleAddDonor = () => {
 
-    const handleAddDonor = () => {
-
+            }
+            return (
+                <Layout children={
+                    <>
+                        <AddDonorAccordion onClick={handleAddDonor} />
+                        <DonorTable donors={donors} onDelete={() => { }} onEdit={() => { }} />
+                    </>
+                } />
+            );
+        }
+        else {
+            router.push("/RequestBlood");
+        }
     }
-    return (
-        <Layout children={
-            <>
-                <AddDonorAccordion onClick={handleAddDonor} />
-                <DonorTable donors={donors} onDelete={()=>{}} onEdit={()=>{}}/>
-            </>
-        } />
-    );
+    else {
+        router.push("/");
+    }
 }
 
 const AddDonorAccordion = ({ onClick }) => {
